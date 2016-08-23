@@ -1,0 +1,37 @@
+<div>
+<table>
+<tr>
+<th>Employee Idas</th>
+<th>Name</th>
+<th> Role</th>
+<th>Street Address</th>
+<th>City</th>
+<th>State</th>
+<th>Zip</th>
+<th> Delete </th>
+</tr>
+<tr ng-repeat = "empDetail in empData">
+<a href ="sampe.html"></a>
+<td>{{empDetail.Id}}</td>
+<td>{{empDetail.Name}}</td>
+<td>{{empDetail.Role}}</td>
+<td>{{empDetail.Address}}</td>
+<td>{{empDetail.City}}</td>
+<td>{{empDetail.State}}</td>
+<td>{{empDetail.Zip}}</td>
+<td><input type="button" value="Delete Employee" ng-click="editEmployee.delEmployee()"></td>
+<!--<td><a href = "sampe.html" ng-click="showAlert()"> Edit </a></td>-->
+<td><input type="button" value="Edit" onclick="sampe.html"></td>
+</tr>
+</table>
+<input type="button" value="Edit" ng-click="editEmployee.newPopup()">
+</div>
+<!--<div> 
+controller: {{editEmployee.name}}<br/>
+Employee ID:{{editEmployee.params.employeeId}}<br/>
+Employee Name:{{editEmployee.params.employeeFname}}<br />
+Employee Role: {{editEmployee.params.employeeRole}}<br />
+Employee Address:{{editEmployee.params.addr}}<br />
+
+<h1> Hello.. You're in edit employee</h1>
+</div>-->

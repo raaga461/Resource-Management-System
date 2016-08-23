@@ -1,0 +1,28 @@
+<!--<div>
+controller: {{employee2.name}}<br/>
+Employee ID:{{employee2.params.employeeId}}<br/>
+Employee Name:{{employee2.params.employeeFname}}<br />
+EMployee Role: {{employee2.params.employeeRole}}
+</div>-->
+<div>
+<table>
+<tr>
+<th>Employee Id</th>
+<th>Name</th>
+<th> Role</th>
+<th>Street Address</th>
+<th>City</th>
+<th>State</th>
+<th>Zip</th>
+</tr>
+<tr ng-repeat = "empDetail in empDetails">
+<td>{{empDetail.Id}}</td>
+<td>{{empDetail.Name}}</td>
+<td>{{empDetail.Role}}</td>
+<td>{{empDetail.Address}}</td>
+<td>{{empDetail.City}}</td>
+<td>{{empDetail.State}}</td>
+<td>{{empDetail.Zip}}</td>
+</tr>
+</table>
+</div>

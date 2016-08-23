@@ -1,0 +1,1 @@
+var employeeData = '[{"id":"1","name":"raga","role":"software engineer","address":"2103 Deer Creek Dr, plainsboro, NJ"},{"id":"2","name":"raji","role":"software engineer","address":"919 Ridge Dr, Dekalb, IL 60115"},{"id":"3","name":"abc","role":"DBA","address":"North America, USA"},{"id":"4","name":"XYZ","role":"Quality Assurance Anayst","address":"DownTown, Chicago"}]';

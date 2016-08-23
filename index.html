@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html  ng-app="nodeProject"> 
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+</style>
+<title> PROJECT NAME </title>
+<script src = "node_modules/angular/angular.js"> 
+</script>
+<script src = "node_modules/angular-route/angular-route.js">
+</script>
+<script src = "scripts/notWork.js"> 
+</script>
+<script src="employee.json">
+</script>
+<!--<script type="text/javascript">
+    angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+  </script>-->
+</head>
+<body>
+<div>
+<table ng-controller="aController">
+<tr><th> Employee Id</th>
+<th>Employee Name</th>
+<th>Employee Role</th>
+<th>Employee Address</th>
+</tr>
+<tr ng-repeat = "employee in employees">
+<td>{{employee.id}}</td>
+<td>{{employee.name}}</td>
+<td>{{employee.role}}</td>
+<td>{{employee.address}}</td>
+</tr>
+
+</table>
+</div>
+
+
+ <div class="view-animate-container">
+    <div ng-view class="view-animate">
+    <div ng-controller="MainCtrl">
+    <div ng-controller="EmpCtrl">
+
+<input type="button" onclick="location.href='Employee.html';" value="Add Employee" />
+</div>
+<pre>$location.path() = {{main.$location.path()}}</pre>
+  <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
+  <pre>$route.current.params = {{main.$route.current.params}}</pre>
+  <pre>$routeParams = {{main.$routeParams}}</pre>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+
