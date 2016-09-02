@@ -1,0 +1,36 @@
+<div>
+<!--<md-dialog aria-label="List dialog">
+  <md-dialog-content>
+    <md-list>
+      <md-list-item ng-repeat="item in items">
+        <p>Number {{item}}</p>
+      </md-list-item>
+    </md-list>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="closeDialog()" class="md-primary">Close Dialog</md-button>
+  </md-dialog-actions>
+</md-dialog>-->
+
+<div>
+    <md-button ng-click="showAlert()" class="md-raised md-warn">
+      Employee Alert!
+      </md-button>
+  </div>
+  <div>
+    <md-button ng-click="showDialog($event)" class="md-raised">
+      Custom Dialog
+      </md-button>
+  </div>
+  <div>
+    <md-button ng-click="closeAlert()" ng-disabled="!hasAlert()" class="md-raised">
+      Close Alert
+    </md-button>
+  </div>
+  <div>
+    <md-button ng-click="showGreeting($event)" class="md-raised md-primary">
+      Greet Employee
+      </md-button>
+  </div>
+</div>
+</div>

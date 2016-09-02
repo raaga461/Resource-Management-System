@@ -1,5 +1,13 @@
-<div>
-<table>
+
+<!--ng-controller="MainCtrl as main">-->
+  <!-- <div ng-controller="EmpCtrl">-->
+   <!-- <a href="Employee/1">DeleteEmployee</a> -->
+ <div ng-controller = "editCtrl"> 
+ <!--<form ng-submit = "editEmployee.editFormSubmit()">-->
+
+ <table> 
+ <script src = "edit.js"> 
+</script>
 <tr>
 <th>Employee Idas</th>
 <th>Name</th>
@@ -9,6 +17,7 @@
 <th>State</th>
 <th>Zip</th>
 <th> Delete </th>
+<th> Edit </th>
 </tr>
 <tr ng-repeat = "empDetail in empData">
 <a href ="sampe.html"></a>
@@ -19,12 +28,14 @@
 <td>{{empDetail.City}}</td>
 <td>{{empDetail.State}}</td>
 <td>{{empDetail.Zip}}</td>
-<td><input type="button" value="Delete Employee" ng-click="editEmployee.delEmployee()"></td>
+<td><button ng-click ="delEmployee(key)">Delete</button>
+</td>
+<td><button ng-click ="editEmployee.showEmp()">Edit</button> </td>
+<!--<td><input type="button" value="Delete Employee" ng-click="editEmployee.delEmployee()"></td>-->
 <!--<td><a href = "sampe.html" ng-click="showAlert()"> Edit </a></td>-->
-<td><input type="button" value="Edit" onclick="sampe.html"></td>
+<!--<td><input type="button" value="Edit" onclick="sampe.html"></td>-->
 </tr>
 </table>
-<input type="button" value="Edit" ng-click="editEmployee.newPopup()">
 </div>
 <!--<div> 
 controller: {{editEmployee.name}}<br/>

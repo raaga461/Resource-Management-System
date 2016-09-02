@@ -1,15 +1,15 @@
 var data = angular.fromJson(employeeData);
-var myApp=angular.module('nodeProject',['ngRoute','firebase'])
+var myApp=angular.module('nodeProject',['ngRoute','firebase','delEmp'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/Employee/:employeeId/fname/:employeeFname',{
-        templateUrl: 'employee.html',
+        templateUrl: 'addEmployee.html',
         controller: 'EmpCtrl',
         controllerAs: 'employee'
     }) 
       .when('/Employee/:employeeId/fname/:employeeFname/role/:employeeRole',{
-        templateUrl: 'employee2.html',
+        templateUrl: 'viewEmployee.html',
         controller: 'EmpCtrl2',
         controllerAs: 'employee2'
       })
@@ -18,8 +18,8 @@ var myApp=angular.module('nodeProject',['ngRoute','firebase'])
         controller:'editCtrl',
         controllerAs:'editEmployee'
       });
-      /*
-      .when('/Employee/:employeeId',{
+      
+     /* .when('/Employee/:employeeId',{
         templateUrl:'deleteEmp.html',
         controller:'delCtrl',
         controllerAs:'deleteEmployee'
@@ -79,11 +79,13 @@ myApp.controller('aController', function($scope) {
   fireRef1.once("value",function(data){
     var x =data.val();
     keys = Object.keys(x);
+    console.log(keys);
     var empl;
     keys.forEach(function(key){
 
       empl = x[key];
-      empDetails.push(empl);
+      console.log(empl);
+      empDetails.push(empl,key);
 
      });
 
@@ -91,87 +93,73 @@ myApp.controller('aController', function($scope) {
 
    });
 
-    //$scope.sampData  = [{"Id": "1","Name":"Abc"}];
-    //var emp ={};
-    /*console.log(empDetails);
-        var empDetails = Object.keys(x);
-        for((Object.keys(x)) in x){
-          if(!x.hasOwnProperty(Object.keys(x))) continue;
-          var k = x[Object.keys(x)];
-          for (var prop in k){
-          if(!k.hasOwnProperty(prop)) continue;
-        console.log(prop + "=" +obj[prop]);
-        }
-      }*/
-        //console.log(empDetails.leng)
-       // for(var i= 0; i<empDetails.le)
-    /*
-      var empRole = x[key].Role;
-      //console.log(empRole);
-      //dataa.push(empRole);
-        //console.log(dataa);
-      var empAddr = x[key].Address;
-      //console.log(empAddr)
-      //dataa.push(empAddr);
-        //console.log(dataa);
-      var empCity = x[key].City;
-      //console.log(empCity);
-      //dataa.push(empCity);
-        //console.log(dataa);
-      var empState = x[key].State;
-     // console.log(empState);
-      //dataa.push(empState);
-        //console.log(dataa);
-      var empZip = x[key].Zip;
-      //console.log(empZip);
-      //dataa.push(empZip);
-    }); */
-   //console.log(dataa);
-
-    //console.log(x);*/
+    
 }])
-.controller('editCtrl',['$scope', '$routeParams', '$firebaseArray','$firebaseObject', function($scope, $routeParams,$firebaseArray,$firebaseObject) {
+.controller('editCtrl',['$scope', '$routeParams', '$firebaseArray','$firebaseObject','delModule', function($scope, $routeParams,$firebaseArray,$firebaseObject, delEmp) {
   var keyz;
   var empData=[];
  this.name = 'editCtrl';
   this.params = $routeParams;
    var editRef = firebase.database().ref().child('Resources');
-  this.employez = $firebaseArray(editRef);
- editRef.once("value",function(data){
+   this.employez = $firebaseArray(editRef);
+  var sam = $firebaseObject(editRef);
+  editRef.once("value",function(data){
     var x =data.val();
     keys = Object.keys(x);
-    var emp;
+    var empl;
     keys.forEach(function(key){
 
-      emp = x[key];
-      empData.pop(emp);
-    });
-       $scope.empData = empData;
-       console.log("hello");
-      this.delEmployee = function(){
-        console.log("hello2");
-      this.employez.$remove({Id: $scope.id, Name:$scope.name, Role:$scope.data.role, Address:$scope.address, City:$scope.city, State: $scope.us.state, Zip:$scope.zip});
-      console.log("hello2");
+      empl = x[key];
+      console.log(empl);
+      empData.push(empl);
+
+     });
+
+        $scope.empData = empData;
+
+   });
+    $scope.showEmp = function(){
+      console.log("in showEmp");
+      $scope.editFormShow = true;
+      $scope.addFormShow = false;
+      Id = $scope.id;
+      Name = $scope.name;
+      Role=$scope.data.role;
+      Address =$scope.address;
+      City = $scope.city;
+      State = $scope.us.state;
+      Zip = $scope.zip;
+      };
+      console.log("middle");
+    $scope.editFormSubmit = function(){
+      console.log('hello in editFormSubmit');
+        var Id =$scope.id;
+        var record = $scope.$getRecord(id);
+        //$scope.record.$save(){
+        record.Id = $scope.id;
+        record.Name = $scope.name;
+        record.Role = $scope.data.role;
+        record.Address = $scope.address;
+        record.City = $scope.city;
+        record.State = $scope.us.state;
+        record.Zip = $scope.zip;
+      //};
+      $scope.employez.$save(record);
+      };
+    var records = $firebaseArray(editRef);
+    
+   
+  $scope.delEmployee = function(key) {
+    console.log("IN delete");
+    this.records = empRecord.all;
+    var remove = this.records.$getRecord(key);
+    this.records.$remove(remove);
     };
-//});
+        
+      //self.sam.$remove(); 
   /*function newPopup(){
    window.open("","","width=200,height=100");
   };*/
 
 }]);
-/*
-.controller('delCtrl', ['$scope','$routeParams','$firebaseArray','$firebaseObject', function delCtrl($scope,$routeParams,$firebaseArray,$firebaseObject) {
-  var self = this;
-  self.name = 'delCtrl';
-   self.params = $routeParams;
-   console.log("Hello");
-   var fredRef =  firebase.database().ref().child('Resources');
-   self.employez = $firebaseArray(fredRef);
-   console.log(employez);
-   //const ref = fireRef.child('object');
-   //this.object = $firebaseObject(ref);
-   var sam = $firebaseObject(fredRef);
-  self.delEmployee = function(fredRef) {
-      self.employez.$remove(fredRef); 
-  };
-  }]);*/  
+
