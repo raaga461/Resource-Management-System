@@ -1,5 +1,5 @@
 var data = angular.fromJson(employeeData);
-var myApp=angular.module('nodeProject',['ngRoute','firebase','delEmp'])
+var myApp=angular.module('nodeProject',['ngRoute','firebase','delModule'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
@@ -95,14 +95,16 @@ myApp.controller('aController', function($scope) {
 
     
 }])
-.controller('editCtrl',['$scope', '$routeParams', '$firebaseArray','$firebaseObject','delModule', function($scope, $routeParams,$firebaseArray,$firebaseObject, delEmp) {
+.controller('editCtrl',['$scope', '$routeParams', '$firebaseArray','$firebaseObject', function($scope, $routeParams, $firebaseArray, $firebase) {
   var keyz;
   var empData=[];
+  var empRecord;
  this.name = 'editCtrl';
   this.params = $routeParams;
    var editRef = firebase.database().ref().child('Resources');
    this.employez = $firebaseArray(editRef);
-  var sam = $firebaseObject(editRef);
+   this.records = $firebaseArray(editRef);
+  //var sam = $firebaseObject(editRef);
   editRef.once("value",function(data){
     var x =data.val();
     keys = Object.keys(x);
@@ -111,23 +113,51 @@ myApp.controller('aController', function($scope) {
 
       empl = x[key];
       console.log(empl);
-      empData.push(empl);
+      console.log(empl);
+      empData.push(empl,key);
 
      });
 
         $scope.empData = empData;
 
    });
+  $scope.deleteEmployee = function(){
+    console.log('In delete function');
+   
+     this.empRecord = {
+    all : records,
+    each : function(key){
+      return records.$getRecord(key);
+    }
+    
+     };
+
+ console.log(empRecord);
+  return empRecord;
+
+  console.log(empRecord);
+  this.records = empRecord.all;
+  var remove = this.records.$getRecord(key);
+  console.log(remove);
+  console.log('After Remove');
+    $scope.records.$remove(remove);
+ 
+}
+
+
+
+
+
     $scope.showEmp = function(){
       console.log("in showEmp");
       $scope.editFormShow = true;
       $scope.addFormShow = false;
       Id = $scope.id;
       Name = $scope.name;
-      Role=$scope.data.role;
-      Address =$scope.address;
+      Role = $scope.role;
+      Address = $scope.address;
       City = $scope.city;
-      State = $scope.us.state;
+      State = $scope.state;
       Zip = $scope.zip;
       };
       console.log("middle");
@@ -138,28 +168,31 @@ myApp.controller('aController', function($scope) {
         //$scope.record.$save(){
         record.Id = $scope.id;
         record.Name = $scope.name;
-        record.Role = $scope.data.role;
+        record.Role = $scope.role;
         record.Address = $scope.address;
         record.City = $scope.city;
-        record.State = $scope.us.state;
+        record.State = $scope.state;
         record.Zip = $scope.zip;
       //};
       $scope.employez.$save(record);
       };
     var records = $firebaseArray(editRef);
-    
    
-  $scope.delEmployee = function(key) {
+   
+  /*$scope.delEmployee = function(key) {
+     //this.empRecord = delEmp.empRecord;
     console.log("IN delete");
     this.records = empRecord.all;
     var remove = this.records.$getRecord(key);
     this.records.$remove(remove);
-    };
+    };*/
         
       //self.sam.$remove(); 
   /*function newPopup(){
    window.open("","","width=200,height=100");
   };*/
 
+
+  
 }]);
 

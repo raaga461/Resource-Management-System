@@ -1,6 +1,8 @@
 var myService = angular.module('delModule', []);
-myService.factory('delEmp',['$scope','$firebaseArray','$firebaseObject','editCtrl',function($scope,$firebaseArray,$firebaseObject){
-var self = this
+
+myService.factory('delEmp',['$firebaseArray','$firebaseObject', function($firebaseArray,$firebaseObject){
+    
+    var self = this
 	var editRef = firebase.database().ref().child('Resources');
    this.records = $firebaseArray(editRef);
   var sam = $firebaseObject(editRef);
@@ -12,14 +14,14 @@ var self = this
 
       empl = x[key];
       console.log(empl);
-      empData.push(empl);
+      empData.push(empl,key);
 
      });
 
         $scope.empData = empData;
 
    }); 
-  var empRecord = {
+  this.empRecord = {
   	all : records,
   	get : function(key){
   		return records.$getRecord(key);

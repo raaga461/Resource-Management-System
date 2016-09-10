@@ -6,8 +6,7 @@
  <!--<form ng-submit = "editEmployee.editFormSubmit()">-->
 
  <table> 
- <script src = "edit.js"> 
-</script>
+ 
 <tr>
 <th>Employee Idas</th>
 <th>Name</th>
@@ -28,9 +27,11 @@
 <td>{{empDetail.City}}</td>
 <td>{{empDetail.State}}</td>
 <td>{{empDetail.Zip}}</td>
-<td><button ng-click ="delEmployee(key)">Delete</button>
+<td><button ng-click ="deleteEmployee()">Delete</button>
 </td>
-<td><button ng-click ="editEmployee.showEmp()">Edit</button> </td>
+<td>
+
+<button ng-click ="showEmp()">Edit</button> </td>
 <!--<td><input type="button" value="Delete Employee" ng-click="editEmployee.delEmployee()"></td>-->
 <!--<td><a href = "sampe.html" ng-click="showAlert()"> Edit </a></td>-->
 <!--<td><input type="button" value="Edit" onclick="sampe.html"></td>-->
